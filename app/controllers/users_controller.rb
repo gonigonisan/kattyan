@@ -18,6 +18,21 @@ class UsersController < ApplicationController
       render :new
     end
   end
+  
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(user_params)
+      # 更新に成功した場合の処理を記述します。
+      flash[:success] = "ユーザーの情報を更新しました。"
+      redirect_to @user
+    else
+      render :edit      
+    end
+  end
 
   private
 
